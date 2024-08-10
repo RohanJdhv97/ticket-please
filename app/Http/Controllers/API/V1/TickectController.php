@@ -4,8 +4,8 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Ticket;
-use App\Http\Requests\StoreTicketRequest;
-use App\Http\Requests\UpdateTicketRequest;
+use App\Http\Requests\API\V1\StoreTicketRequest;
+use App\Http\Requests\API\V1\UpdateTicketRequest;
 
 class TickectController extends Controller
 {
@@ -14,15 +14,7 @@ class TickectController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return Ticket::all();
     }
 
     /**
@@ -37,14 +29,6 @@ class TickectController extends Controller
      * Display the specified resource.
      */
     public function show(Ticket $ticket)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Ticket $ticket)
     {
         //
     }
