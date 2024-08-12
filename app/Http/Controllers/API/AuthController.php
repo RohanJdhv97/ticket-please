@@ -22,7 +22,7 @@ class AuthController extends Controller
         }
 
         $user = User::where('email', $request->email)->first();
-        $token = $user->createToken('authToken', ['*'], now()->addMinutes(2))->plainTextToken;
+        $token = $user->createToken('authToken', ['*'], now()->addHour())->plainTextToken;
         return response()->json(['token' => $token]);
     }
 
