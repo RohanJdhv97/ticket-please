@@ -22,12 +22,18 @@ class AuthController extends Controller
         }
 
         $user = User::where('email', $request->email)->first();
-        $token = $user->createToken('authToken', ['*'])->plainTextToken;
+        $token = $user->createToken('authToken', ['*'], now()->addMinutes(2))->plainTextToken;
         return response()->json(['token' => $token]);
     }
 
     public function register(RegisterRequest $request)
     {
         return $this->success('Register Success ' . $request->name);
+    }
+
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+        return response()->json(['message' => 'Logout Success']);
     }
 }
