@@ -8,13 +8,16 @@ use App\Http\Requests\API\V1\StoreTicketRequest;
 use App\Http\Requests\API\V1\UpdateTicketRequest;
 use App\Http\Resources\V1\TicketResource;
 
-class TickectController extends Controller
+class TickectController extends ApiController
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        if($this->include('author')){
+            return TicketResource::collection(Ticket::with('user')->get());
+        }
         return TicketResource::collection(Ticket::paginate());
     }
 
@@ -31,6 +34,9 @@ class TickectController extends Controller
      */
     public function show(Ticket $ticket)
     {
+        if($this->include('author')){
+            return new TicketResource($ticket->load('user'));
+        }
         return new TicketResource($ticket);
     }
 
